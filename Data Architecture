@@ -1,0 +1,20 @@
+Data architecture prompt:
+
+The plant data would be held like metadata, it could be used to link the hourly generation and imagery data as well as to parse out certain data subsets, such as coal power plants (fuel_type == COAL ) and 100MW minimum capacity (capacity >= 100)*assumption that units are in MW already*. A plant could be added at any time, and its inclusion would ensure the documentation of necessary meta data. 
+The generation data would be stored in the format of its collection: generation reporting id, generation (MW/hr), time stamp.
+The imagery data could be stored in a directory, with a database documenting: plant name, file path to image, cloud cover (decimal), and timestamp for each image collected and analyzed.
+
+To collect 
+● Image timestamp
+● Image file object or file path
+● Image cloud cover fraction
+● Plant identifier
+● Unit identifier
+● Unit generation
+For all coal generation units greater than 100MW in the United States.
+
+We would first generate a list of all plants in question using the SQL statements:
+(fuel_type == COAL ) && (capacity >= 100)
+We would then pull image path, cloud cover, and time stamp for all plants from the list above, as the imagery is only collected every 5 days it will be our limiting factor vs hourly generation and therefore matched first for diminished computing time. At a minimum, we will add the generation reporting ID (unit id) to the plant name (plant id), image path, cloud cover, image timestamp for each image entry for plants in question.
+Finally, we will add unit generation based on generation reporting ID and timestamp–formatted to hourly precision in both image and generation data to ensure overlap.
+

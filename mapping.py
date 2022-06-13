@@ -7,7 +7,7 @@ This is a temporary script file.
 import pandas as pd
 
 
-dir = 'lucyrieves/WattTimeTakeHome/'
+dir = '~/downloads/WattTimeTakeHome-main/'
 
 
 platts = pd.read_csv(dir + 'platts.csv')
